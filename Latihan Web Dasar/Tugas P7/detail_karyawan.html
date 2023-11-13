@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Detail Karyawan</title>
+</head>
+<body>
+    <h1>Sistem Informasi Penggajian</h1>
+    <div id="detail_karyawan">
+        <p>Selamat Datang di Perusahaan Berjuang Bersama.
+            Perusahaan Berjuang Bersama adalah perusahaan yang berkomitmen untuk memberikan solusi terbaik bagi pelanggannya. Kami percaya bahwa kesuksesan pelanggan adalah kesuksesan kami juga. Oleh karena itu, kami selalu berusaha untuk memahami kebutuhan pelanggan dan memberikan solusi yang sesuai dengan kebutuhan tersebut.
+        </p>
+    </div>
+
+    <script>
+        // Ambil ID karyawan dari parameter URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const karyawanId = urlParams.get('id');
+
+        // Contoh data karyawan (biasanya akan diambil dari server atau database)
+        const karyawanData = {
+            1: { nama: 'Ahmad', posisi: 'Manager', gaji: 7000000, mulai_bekerja: '2019-05-15' },
+            2: { nama: 'Iwan', posisi: 'Staf', gaji: 5000000, mulai_bekerja: '2021-03-10' },
+            3: { nama: 'Melinda', posisi: 'Akunting', gaji: 6000000, mulai_bekerja: '2020-12-01' }
+        };
+
+        if (karyawanData[karyawanId]) {
+            const detailKaryawan = karyawanData[karyawanId];
+            const detailKaryawanHtml = `
+                <p>Nama: ${detailKaryawan.nama}</p>
+                <p>Posisi: ${detailKaryawan.posisi}</p>
+                <p>Gaji: ${detailKaryawan.gaji}</p>
+                <p>Lama Bekerja: ${hitungLamaBekerja(detailKaryawan.mulai_bekerja)} tahun</p>
+            `;
+            document.getElementById('detail_karyawan').innerHTML = detailKaryawanHtml;
+        }
+
+        // Fungsi untuk menghitung lama bekerja
+        function hitungLamaBekerja(tanggalMulai) {
+            const tanggalMulaiKerja = new Date(tanggalMulai);
+            const tanggalHariIni = new Date();
+            const selisihTahun = tanggalHariIni.getFullYear() - tanggalMulaiKerja.getFullYear();
+
+            return selisihTahun;
+        }
+    </script>
+</body>
+</html>
